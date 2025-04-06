@@ -1,0 +1,59 @@
+
+import { Task } from '@/interfaces';
+import { create } from 'zustand';
+import { persist } from "zustand/middleware";
+
+interface State {
+    tasks: Task[];
+
+    getTasksNumber: () => number;
+    addTask: (task: Task) => void;
+    removeTask: (id: string) => void;
+    updateTask: (id: string, updatedTask: Partial<Task>) => void;
+
+}
+
+export const useTaskStore = create<State>()(
+    persist(
+        (set, get) => ({
+
+            tasks: [],
+
+            getTasksNumber: () => {
+                const { tasks } = get();
+                return tasks.length;
+            },
+
+            addTask: (task: Task) => {
+                const { tasks } = get();
+
+                const existingTask = tasks.some(
+                    (taskItem) => taskItem.title === task.title && taskItem.description === task.description
+                )
+
+                if (!existingTask) {
+                    set({ tasks: [...tasks, task] });
+                    return;
+                }
+
+            },
+
+            removeTask: (id: string) => {
+                const { tasks } = get();
+                set({ tasks: tasks.filter(task => task.id !== id) });
+            },
+
+            updateTask: (id: string, updatedTask: Partial<Task>) => {
+                const { tasks } = get();
+                set({
+                    tasks: tasks.map(task => task.id === id ? { ...task, ...updatedTask } : task)
+                });
+            },
+
+        }),
+
+        {
+            name: 'tasks-storage'
+        }
+    )
+)
