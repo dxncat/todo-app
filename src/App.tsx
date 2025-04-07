@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react"
 import { v4 } from "uuid"
 import { useTaskStore } from "./store/taskStore"
-import { Filter, Flag, FlagOff, Plus, SquareCheckBig } from "lucide-react"
-import { TaskTable } from "./components"
+import { Plus, SquareCheckBig } from "lucide-react"
+import { TasksFilter, TaskTable } from "./components"
 import { Button } from "./components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./components/ui/dropdown-menu"
 
 function App() {
 
@@ -41,41 +40,7 @@ function App() {
         <h2 className="text-3xl">Tareas pendientes</h2>
         <div className="flex items-center gap-4">
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant='ghost' className="cursor-pointer">
-                <Filter className="size-4" />
-                Filtrar
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>
-                Filtrar por:
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                className="cursor-pointer hover:bg-blue-600 hover:text-white"
-                onClick={() => setFiltro("all")}
-              >
-                <SquareCheckBig className="text-blue-500" />
-                <span className="text-blue-500">Todas</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                className="cursor-pointer hover:bg-green-600 hover:text-white"
-                onClick={() => setFiltro("completed")}
-              >
-                <Flag className="text-green-500" />
-                <span className="text-green-500">Completas</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                className="cursor-pointer"
-                onClick={() => setFiltro("incomplete")}
-              >
-                <FlagOff className="text-red-500" />
-                <span className="text-red-500">Incompletas</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <TasksFilter setFiltro={setFiltro} />
 
           <Button className="cursor-pointer">
             <Plus />
