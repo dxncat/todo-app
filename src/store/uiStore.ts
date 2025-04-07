@@ -1,12 +1,14 @@
+import { Task } from "@/interfaces";
 import { create } from "zustand";
 
 interface State {
     isTaskFormOpen: boolean;
     isTaskFromUpdateOpen: boolean;
+    selectedTask: Task | null;
     openTaskForm: () => void;
-    openTaskFormUpdate: () => void;
-    closeTaskForm: () => void;
+    openTaskFormUpdate: (task: Task) => void;
     closeTaskFormUpdate: () => void;
+    setSelectedTask: (task: Task | null) => void;
 }
 
 export const useUiStore = create<State>((set) => ({
@@ -16,6 +18,8 @@ export const useUiStore = create<State>((set) => ({
     closeTaskForm: () => set({ isTaskFormOpen: false }),
 
     isTaskFromUpdateOpen: false,
-    openTaskFormUpdate: () => set({ isTaskFromUpdateOpen: true }),
-    closeTaskFormUpdate: () => set({ isTaskFromUpdateOpen: false })
+    selectedTask: null,
+    openTaskFormUpdate: (task: Task) => set({ isTaskFromUpdateOpen: true, selectedTask: task }),
+    closeTaskFormUpdate: () => set({ isTaskFromUpdateOpen: false, selectedTask: null }),
+    setSelectedTask: (task: Task | null) => set({ selectedTask: task }),
 }))

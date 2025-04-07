@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { v4 } from "uuid"
 import { useTaskStore } from "./store/taskStore"
 import { Plus, SquareCheckBig } from "lucide-react"
-import { TaskForm, TasksFilter, TaskTable } from "./components"
+import { EditTaskForm, TaskForm, TasksFilter, TaskTable } from "./components"
 import { Button } from "./components/ui/button"
 import { useUiStore } from "./store/uiStore"
 
@@ -24,10 +24,9 @@ function App() {
     }
 
     addTask(task)
-  }, [])
+  }, [addTask])
 
   const tareasFiltradas = tasks.filter((task) => {
-    console.log(filtro)
     if (filtro === "completas") return task.completed
     if (filtro === "incompletas") return !task.completed
     return true // "all"
@@ -56,6 +55,7 @@ function App() {
 
       <TaskTable tasks={tareasFiltradas} />
       <TaskForm />
+      <EditTaskForm />
     </>
   )
 }

@@ -3,6 +3,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigg
 import { Button } from "../ui/button";
 import { FlagOff, MoreHorizontal, PenLine, SquareCheckBig, Trash } from "lucide-react";
 import { useTaskStore } from "@/store/taskStore";
+import { useUiStore } from "@/store/uiStore";
 
 interface Props {
     task: Task
@@ -12,6 +13,7 @@ export function ItemActions({ task }: Props) {
     const removeTask = useTaskStore((state) => state.removeTask)
     const completeTask = useTaskStore((state) => state.completeTask)
     const setUncompletedTask = useTaskStore((state) => state.setUncompletedTask)
+    const openTaskFormUpdate = useUiStore((state) => state.openTaskFormUpdate)
 
     return (
         <DropdownMenu>
@@ -46,7 +48,7 @@ export function ItemActions({ task }: Props) {
                 }
                 <DropdownMenuItem
                     className="cursor-pointer hover:bg-blue-600 hover:text-white"
-                    onClick={() => console.log(task.id)}
+                    onClick={() => { openTaskFormUpdate(task) }}
                 >
                     <PenLine className="text-blue-500" />
                     <span className="text-blue-500">Editar</span>
