@@ -6,6 +6,7 @@ interface State {
     isTaskFromUpdateOpen: boolean;
     selectedTask: Task | null;
     openTaskForm: () => void;
+    closeTaskForm: () => void;
     openTaskFormUpdate: (task: Task) => void;
     closeTaskFormUpdate: () => void;
     setSelectedTask: (task: Task | null) => void;
