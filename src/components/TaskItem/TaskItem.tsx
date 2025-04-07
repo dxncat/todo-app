@@ -31,7 +31,7 @@ export function TaskItem({ tasks }: Props) {
 
                         <TableCell className="w-[140px] md:w-[160px]">
                             <span
-                                className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${task.completed ? "text-green-600" : "bg-red-500 text-white"
+                                className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${task.completed ? "text-green-600 dark:text-green-800" : "bg-red-500 dark:bg-red-800 text-white"
                                     }`}
                             >
                                 {task.completed

@@ -5,6 +5,7 @@ import { Plus, SquareCheckBig } from "lucide-react"
 import { EditTaskForm, TaskForm, TasksFilter, TaskTable } from "./components"
 import { Button } from "./components/ui/button"
 import { useUiStore } from "./store/uiStore"
+import { ModeToggle } from "./components/ModeToggle/ModeToggle"
 
 function App() {
 
@@ -34,13 +35,17 @@ function App() {
 
   return (
     <>
+
       <div className="flex items-center justify-center gap-4 mb-8">
         <SquareCheckBig className="size-12" />
         <h1 className="text-5xl">ToDo App</h1>
       </div>
+
       <h2 className="text-3xl mb-8">Tareas pendientes</h2>
 
       <div className="flex items-center justify-end gap-4 mb-4">
+
+        <ModeToggle />
 
         <TasksFilter setFiltro={setFiltro} filtro={filtro} />
 
