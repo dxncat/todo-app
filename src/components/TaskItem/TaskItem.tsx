@@ -13,12 +13,23 @@ export function TaskItem({ tasks }: Props) {
             {
                 tasks.map((task) => (
                     <TableRow key={task.id}>
-                        <TableCell className="font-medium">{task.title}</TableCell>
-                        <TableCell className="hidden md:table-cell">{task.description}</TableCell>
-                        <TableCell className="hidden sm:table-cell">
+                        <TableCell className="font-medium max-w-[150px] md:max-w-[200px]">
+                            <div className="truncate" title={task.title}>
+                                {task.title}
+                            </div>
+                        </TableCell>
+
+                        <TableCell className="hidden md:table-cell max-w-[250px] lg:max-w-[400px]">
+                            <div className="truncate" title={task.description}>
+                                {task.description}
+                            </div>
+                        </TableCell>
+
+                        <TableCell className="hidden sm:table-cell whitespace-nowrap w-[140px]">
                             {formatDate(task.createdAt)}
                         </TableCell>
-                        <TableCell>
+
+                        <TableCell className="w-[140px] md:w-[160px]">
                             <span
                                 className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${task.completed ? "text-green-600" : "bg-red-500 text-white"
                                     }`}
@@ -30,7 +41,11 @@ export function TaskItem({ tasks }: Props) {
                                     : "No completado"}
                             </span>
                         </TableCell>
-                        <TableCell><ItemActions task={task} /></TableCell>
+
+                        <TableCell className="w-[50px]">
+                            <ItemActions task={task} />
+                        </TableCell>
+
                     </TableRow>
                 ))
             }

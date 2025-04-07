@@ -40,11 +40,11 @@ export function TaskTable({ tasks }: Props) {
                 <TableCaption>Total de tareas: {tasks.length}</TableCaption>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Titulo</TableHead>
-                        <TableHead className="hidden md:table-cell">Descripción</TableHead>
-                        <TableHead className="hidden sm:table-cell">Creado</TableHead>
-                        <TableHead>Estado</TableHead>
-                        <TableHead>Acciones</TableHead>
+                        <TableHead className="w-[150px] md:w-[200px]">Título</TableHead>
+                        <TableHead className="hidden md:table-cell w-[250px] lg:w-[400px]">Descripción</TableHead>
+                        <TableHead className="hidden sm:table-cell w-[140px]">Creado</TableHead>
+                        <TableHead className="w-[140px] md:w-[160px]">Estado</TableHead>
+                        <TableHead className="w-[50px]">Acciones</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TaskItem tasks={tasks} />
