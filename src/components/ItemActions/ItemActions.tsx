@@ -1,7 +1,7 @@
 import { Task } from "@/interfaces";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger, DropdownMenuSeparator, DropdownMenuItem } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
-import { MoreHorizontal, PenLine, SquareCheckBig, Trash } from "lucide-react";
+import { FlagOff, MoreHorizontal, PenLine, SquareCheckBig, Trash } from "lucide-react";
 import { useTaskStore } from "@/store/taskStore";
 
 interface Props {
@@ -11,7 +11,7 @@ export function ItemActions({ task }: Props) {
 
     const removeTask = useTaskStore((state) => state.removeTask)
     const completeTask = useTaskStore((state) => state.completeTask)
-
+    const setUncompletedTask = useTaskStore((state) => state.setUncompletedTask)
 
     return (
         <DropdownMenu>
@@ -25,13 +25,25 @@ export function ItemActions({ task }: Props) {
                     Acciones
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem
-                    className="cursor-pointer hover:bg-green-600 hover:text-white"
-                    onClick={() => completeTask(task.id)}
-                >
-                    <SquareCheckBig className="text-green-500" />
-                    <span className="text-green-500">Completar</span>
-                </DropdownMenuItem>
+                {
+                    task.completed ? (
+                        <DropdownMenuItem
+                            className="cursor-pointer hover:bg-red-500 hover:text-white"
+                            onClick={() => setUncompletedTask(task.id)}
+                        >
+                            <FlagOff className="text-red-500" />
+                            <span className="text-red-500">Marcar como incompleta</span>
+                        </DropdownMenuItem>
+                    ) : (
+                        <DropdownMenuItem
+                            className="cursor-pointer hover:bg-green-600 hover:text-white"
+                            onClick={() => completeTask(task.id)}
+                        >
+                            <SquareCheckBig className="text-green-500" />
+                            <span className="text-green-500">Marcar como completa</span>
+                        </DropdownMenuItem>
+                    )
+                }
                 <DropdownMenuItem
                     className="cursor-pointer hover:bg-blue-600 hover:text-white"
                     onClick={() => console.log(task.id)}

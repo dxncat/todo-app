@@ -3,17 +3,34 @@ import { Button } from "../ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 
 interface Props {
-    setFiltro: (filter: "all" | "completed" | "incomplete") => void;
+    filtro: "all" | "completas" | "incompletas";
+    setFiltro: (filter: "all" | "completas" | "incompletas") => void;
 }
 
-export function TasksFilter({ setFiltro }: Props) {
+export function TasksFilter({ setFiltro, filtro }: Props) {
 
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant='ghost' className="cursor-pointer">
-                    <Filter className="size-4" />
-                    Filtrar
+                    {
+                        filtro === "all" ? (
+                            <>
+                                <Filter className="size-4 " />
+                                <span className="">Filtrar</span>
+                            </>
+                        ) : filtro === "completas" ? (
+                            <>
+                                <Filter className="size-4 text-green-500" />
+                                <span className="text-green-500">Completas</span>
+                            </>
+                        ) : (
+                            <>
+                                <Filter className="size-4 text-red-500" />
+                                <span className="text-red-500">Incompletas</span>
+                            </>
+                        )
+                    }
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -30,14 +47,14 @@ export function TasksFilter({ setFiltro }: Props) {
                 </DropdownMenuItem>
                 <DropdownMenuItem
                     className="cursor-pointer hover:bg-green-600 hover:text-white"
-                    onClick={() => setFiltro("completed")}
+                    onClick={() => setFiltro("completas")}
                 >
                     <Flag className="text-green-500" />
                     <span className="text-green-500">Completas</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem
                     className="cursor-pointer"
-                    onClick={() => setFiltro("incomplete")}
+                    onClick={() => setFiltro("incompletas")}
                 >
                     <FlagOff className="text-red-500" />
                     <span className="text-red-500">Incompletas</span>

@@ -10,7 +10,7 @@ function App() {
   const addTask = useTaskStore((state) => state.addTask)
   const tasks = useTaskStore((state) => state.tasks)
 
-  const [filtro, setFiltro] = useState<"all" | "completed" | "incomplete">("all")
+  const [filtro, setFiltro] = useState<"all" | "completas" | "incompletas">("all")
 
   useEffect(() => {
     const task = {
@@ -25,8 +25,9 @@ function App() {
   }, [])
 
   const tareasFiltradas = tasks.filter((task) => {
-    if (filtro === "completed") return task.completed
-    if (filtro === "incomplete") return !task.completed
+    console.log(filtro)
+    if (filtro === "completas") return task.completed
+    if (filtro === "incompletas") return !task.completed
     return true // "all"
   })
 
@@ -40,7 +41,7 @@ function App() {
         <h2 className="text-3xl">Tareas pendientes</h2>
         <div className="flex items-center gap-4">
 
-          <TasksFilter setFiltro={setFiltro} />
+          <TasksFilter setFiltro={setFiltro} filtro={filtro} />
 
           <Button className="cursor-pointer">
             <Plus />
