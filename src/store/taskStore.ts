@@ -11,6 +11,7 @@ interface State {
     removeTask: (id: string) => void;
     updateTask: (id: string, updatedTask: Partial<Task>) => void;
     completeTask: (id: string) => void;
+    setUncompletedTask: (id: string) => void;
 
 }
 
@@ -64,6 +65,21 @@ export const useTaskStore = create<State>()(
                             ...task,
                             completed: true,
                             completedAt: new Date()
+                        }
+                    }
+                    return task;
+                })
+                set({ tasks: updatedTasks });
+            },
+
+            setUncompletedTask: (id: string) => {
+                const { tasks } = get();
+                const updatedTasks = tasks.map(task => {
+                    if (task.id === id) {
+                        return {
+                            ...task,
+                            completed: false,
+                            completedAt: undefined
                         }
                     }
                     return task;
