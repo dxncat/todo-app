@@ -6,13 +6,15 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { TaskItem } from "../TaskItem/TaskItem"
-import { useTaskStore } from "@/store/taskStore"
 import { Button } from "../ui/button"
 import { Plus } from "lucide-react"
+import { Task } from "@/interfaces"
 
-export function TaskTable() {
+interface Props {
+    tasks: Task[]
+}
 
-    const tasks = useTaskStore((state) => state.tasks)
+export function TaskTable({ tasks }: Props) {
 
     if (tasks.length === 0) {
         return (

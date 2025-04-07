@@ -20,7 +20,7 @@ export function TaskItem({ tasks }: Props) {
                         </TableCell>
                         <TableCell>
                             <span
-                                className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${task.completed ? "text-green-600" : "bg-yellow-100 text-yellow-800"
+                                className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${task.completed ? "text-green-600" : "bg-red-500 text-white"
                                     }`}
                             >
                                 {task.completed
