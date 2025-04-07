@@ -9,6 +9,7 @@ import { TaskItem } from "../TaskItem/TaskItem"
 import { Button } from "../ui/button"
 import { Plus } from "lucide-react"
 import { Task } from "@/interfaces"
+import { useUiStore } from "@/store/uiStore"
 
 interface Props {
     tasks: Task[]
@@ -16,11 +17,16 @@ interface Props {
 
 export function TaskTable({ tasks }: Props) {
 
+    const openTaskForm = useUiStore((state) => state.openTaskForm)
+
     if (tasks.length === 0) {
         return (
             <div className="rounded-md border p-8 text-center">
                 <p className="text-muted-foreground text-lg mb-4">No hay tareas pendientes, intenta crear una nueva</p>
-                <Button>
+                <Button
+                    className="cursor-pointer"
+                    onClick={openTaskForm}
+                >
                     <Plus />
                     Nueva tarea
                 </Button>
