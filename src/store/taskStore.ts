@@ -10,6 +10,7 @@ interface State {
     addTask: (task: Task) => void;
     removeTask: (id: string) => void;
     updateTask: (id: string, updatedTask: Partial<Task>) => void;
+    completeTask: (id: string) => void;
 
 }
 
@@ -40,7 +41,12 @@ export const useTaskStore = create<State>()(
 
             removeTask: (id: string) => {
                 const { tasks } = get();
-                set({ tasks: tasks.filter(task => task.id !== id) });
+
+                const updatedTasks = tasks.filter(
+                    (task) => task.id !== id
+                )
+
+                set({ tasks: updatedTasks });
             },
 
             updateTask: (id: string, updatedTask: Partial<Task>) => {
@@ -49,6 +55,21 @@ export const useTaskStore = create<State>()(
                     tasks: tasks.map(task => task.id === id ? { ...task, ...updatedTask } : task)
                 });
             },
+
+            completeTask: (id: string) => {
+                const { tasks } = get();
+                const updatedTasks = tasks.map(task => {
+                    if (task.id === id) {
+                        return {
+                            ...task,
+                            completed: true,
+                            completedAt: new Date()
+                        }
+                    }
+                    return task;
+                })
+                set({ tasks: updatedTasks });
+            }
 
         }),
 
