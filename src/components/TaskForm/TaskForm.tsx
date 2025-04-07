@@ -14,6 +14,7 @@ import { Textarea } from "../ui/textarea"
 import { useState } from "react"
 import { useTaskStore } from "@/store/taskStore"
 import { v4 } from "uuid"
+import { toast } from "sonner"
 
 export function TaskForm() {
 
@@ -44,6 +45,17 @@ export function TaskForm() {
         setTitle("")
         setDescription("")
         setError("")
+        toast("La tarea se ha creado con éxito.", {
+            description: "Revisa la lista de tareas para ver la nueva tarea.",
+            duration: 3000,
+            action: {
+                label: "undo",
+                onClick: () => {
+                    toast.dismiss()
+                }
+            }
+        }
+        )
     }
 
     return (

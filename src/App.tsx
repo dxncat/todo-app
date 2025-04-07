@@ -6,6 +6,7 @@ import { EditTaskForm, TaskForm, TasksFilter, TaskTable } from "./components"
 import { Button } from "./components/ui/button"
 import { useUiStore } from "./store/uiStore"
 import { ModeToggle } from "./components/ModeToggle/ModeToggle"
+import { Toaster } from "sonner"
 
 function App() {
 
@@ -61,6 +62,7 @@ function App() {
       <TaskTable tasks={tareasFiltradas} />
       <TaskForm />
       <EditTaskForm />
+      <Toaster />
     </>
   )
 }
