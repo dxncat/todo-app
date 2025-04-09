@@ -24,7 +24,6 @@ export function EditTaskForm() {
     const [description, setDescription] = useState<string>("");
     const [error, setError] = useState<string>("");
 
-    // Sincronizar los valores de title y description con selectedTask
     useEffect(() => {
         if (selectedTask) {
             setTitle(selectedTask.title);
